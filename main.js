@@ -36,6 +36,17 @@ function noAccent(word){
 
 function speak(text){
     speechSynthesis.speak(new SpeechSynthesisUtterance(text));
+
+  speechSynthesis.onvoiceschanged = () => {
+  const synth = speechSynthesis
+  const voices = synth.getVoices()
+  console.log(voices)
+  const utterThis = new SpeechSynthesisUtterance(text)
+  utterThis.voice = voices.find(v => v.name === 'Jorge')
+  utterThis.pitch = 1.5
+  utterThis.rate = 2
+  synth.speak(utterThis)
+}
 }
 
 
@@ -74,7 +85,7 @@ function draw(array){
     for(x=0;x<limit;x++){
       var embedFunction=`onclick="speak('`+array[x].rar+`')"`
 
-      var content='<div class="col-md-6"><div class="card"><div class="card-header"><span class="badge badge-warning">Raramuri</span> <span class="material-icons"'+embedFunction+' >volume_up</span>'+
+      var content='<div class="col-md-6"><div class="card"><div class="card-header"><span class="badge badge-warning">Rarámuri</span> <span class="material-icons"'+embedFunction+' >volume_up</span>'+
         array[x].rar
       +' </div><div class="card-body"><p class="card-text">'+
         array[x].spa
