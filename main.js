@@ -34,8 +34,14 @@ function noAccent(word){
   return word.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
+function speak(text){
+    speechSynthesis.speak(new SpeechSynthesisUtterance(text));
+}
+
+
+
 $("#input" ).keyup(function() {
- search=$("#input").val().toLowerCase(); 
+ search=$("#input").val().toLowerCase();
  draw(filter(search));
 });
 
@@ -66,8 +72,9 @@ function draw(array){
     $("#resultContainer").append(content);
   }else{
     for(x=0;x<limit;x++){
+      var embedFunction=`onclick="speak('`+array[x].rar+`')"`
 
-      var content='<div class="col-md-6"><div class="card"><div class="card-header"><span class="badge badge-warning">Raramuri</span> '+
+      var content='<div class="col-md-6"><div class="card"><div class="card-header"><span class="badge badge-warning">Raramuri</span> <span class="material-icons"'+embedFunction+' >volume_up</span>'+
         array[x].rar
       +' </div><div class="card-body"><p class="card-text">'+
         array[x].spa
