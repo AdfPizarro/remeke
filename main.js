@@ -35,7 +35,7 @@ function noAccent(word){
 }
 
 $("#input" ).keyup(function() {
- search=$("#input").val();
+ search=$("#input").val().toLowerCase(); 
  draw(filter(search));
 });
 
@@ -67,9 +67,9 @@ function draw(array){
   }else{
     for(x=0;x<limit;x++){
 
-      var content='<div class="col-md-6"><div class="card"><div class="card-header">'+
+      var content='<div class="col-md-6"><div class="card"><div class="card-header"><span class="badge badge-warning">Raramuri</span> '+
         array[x].rar
-      +'</div><div class="card-body"><p class="card-text">'+
+      +' </div><div class="card-body"><p class="card-text">'+
         array[x].spa
       +'</p></div></div></div> ';
 
