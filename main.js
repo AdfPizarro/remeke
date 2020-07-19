@@ -1,7 +1,6 @@
 var search=""
 
 
-
 /*
 var openFile = function(event) {
       var input = event.target;
@@ -49,8 +48,6 @@ function speak(text){
 }
 }
 
-
-
 $("#input" ).keyup(function() {
  search=$("#input").val().toLowerCase();
  draw(filter(search));
@@ -95,8 +92,6 @@ function draw(array){
     }
 
   }
-
-
 
 
 }
