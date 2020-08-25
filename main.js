@@ -51,7 +51,7 @@ function speak(text){
 $("#input" ).keyup(function() {
  search=$("#input").val().toLowerCase();
  draw(filter(search));
- $(".info-text").addClass("d-sm-none");
+ $(".info-text").addClass("d-none d-md-block");
 });
 
 function filter(word){
