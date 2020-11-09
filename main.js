@@ -88,11 +88,16 @@ function filter(word){
 function draw(array){
   $("#resultContainer").empty()
   var limit;
+  var mediaWidth = window.matchMedia("(max-width: 600px)");
 
   if (array.length>15){
     limit=15;
   }else{
     limit=array.length;
+  }
+
+  if (limit>=7&&mediaWidth.matches) {
+     limit=8;
   }
 
   if (array.length==0){
