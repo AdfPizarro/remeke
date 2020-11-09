@@ -1,3 +1,138 @@
-.card{
-  margin: 20px 0 !important;
+@font-face {
+    font-family: Zantroke;
+    src: url("fonts/zantroke/zantroke.otf") format("opentype");
+}
+
+body {
+ background-image: url("img/maiz.png");
+ background-size: auto auto ;
+ background-repeat: no-repeat;
+}
+
+.container {
+ margin: auto;
+ width: 60%;
+
+ padding: 10px;
+}
+
+.full{
+  grid-column: 1/-1;
+  font-size: 3.5vh;
+  font-weight: 700;
+}
+.full .card .badge{
+  margin: 50px 15px;
+}
+
+.no_info {
+  margin-top: 15px;
+  background-color:
+  rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  padding: 15px;
+  font-family: 'Roboto', sans-serif;
+   grid-column: 1/-1
+}
+
+.badge{
+  display: inline-block;
+ padding: .25em .4em;
+ font-size: 75%;
+ font-weight: 700;
+ line-height: 1;
+ text-align: center;
+ white-space: nowrap;
+ vertical-align: baseline;
+ border-radius: .25rem;
+ color: #212529;
+ background-color: #ffc107;
+
+ margin: 5px;
+}
+
+.material-icons{
+  text-align: right;
+}
+
+.result_container{
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+}
+
+.card {
+  margin: 10px;
+  background-color:
+  rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  padding: 10px;
+  font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+  text-align: center;
+  font-family: 'Zantroke', serif;
+  font-size: 9vh;
+  margin-top: 0;
+
+}
+
+.title{
+  text-align: center;
+  font-family: 'Zantroke', serif;
+  font-size: 2.5vh;
+}
+
+.notes{
+  margin-top: 15px;
+  background-color:
+  rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  padding: 15px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.search_input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: white;
+  background-image: url('img/search.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  padding-left: 40px;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .container {width: 90%;}
+  .result_container{grid-template-columns: 1fr;}
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+   .container {width: 80%;}
+     .result_container{grid-template-columns: 1fr 1fr;}
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .result_container{grid-template-columns: 1fr 1fr 1fr;}
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .container {width: 60%;}
 }

@@ -1,7 +1,7 @@
 var search=""
 
 
-/*
+
 var openFile = function(event) {
       var input = event.target;
       var reader = new FileReader();
@@ -11,14 +11,28 @@ var openFile = function(event) {
 
     lines=text.split("\n");
 
-    for(x=1;x<lines.length;x++){
-
+    for(x=0;x<lines.length-1;x++){
+      tagList=[];
       var rar=lines[x].substring(0,lines[x].indexOf(','));
-      var spa=lines[x].substring(lines[x].lastIndexOf(',')+1,lines[x].length-1);
+      lines[x]=lines[x].substring(lines[x].indexOf(',')+1,lines[x].length);
+
+      var spa=lines[x].substring(0,lines[x].indexOf(','));
+      lines[x]=lines[x].substring(lines[x].indexOf(',')+1,lines[x].length-2);
       var rarNo=noAccent(rar);
       var spaNo=noAccent(spa);
+      console.log(lines[x])
 
-      dictionary.push({rar:rar, spa:spa, rarNo:rarNo, spaNo:spaNo});
+
+
+
+      tagList=lines[x].split('#');
+      tags=[];
+      for(y=1;y<tagList.length;y++){
+        tags.push(tagList[y].trim())
+      }
+
+
+      dictionary.push({rar:rar, spa:spa, rarNo:rarNo, spaNo:spaNo, tags:tags});
 
     }
 
@@ -28,7 +42,7 @@ var openFile = function(event) {
       reader.readAsText(input.files[0]);
 };
 
-*/
+
 function noAccent(word){
   return word.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
@@ -50,8 +64,15 @@ function speak(text){
 
 $("#input" ).keyup(function() {
  search=$("#input").val().toLowerCase();
- draw(filter(search));
- $(".info-text").addClass("d-none d-md-block");
+
+ if (search.length == 0) {
+   $(".notes").show();
+   $("#resultContainer").empty()
+ }else{
+   $(".notes").hide();
+   draw(filter(search));
+ }
+
 });
 
 function filter(word){
@@ -68,26 +89,29 @@ function draw(array){
   $("#resultContainer").empty()
   var limit;
 
-  if (array.length>10){
-    limit=10;
+  if (array.length>15){
+    limit=15;
   }else{
     limit=array.length;
   }
 
   if (array.length==0){
-    var content='<div class="col-md-12"><h1>No hay informacion</h1><p>Intente alguna palabra o expresion distinta</p>'
+    var content='<div class="no_info"><h2>No hay informacion</h2>'
     +'</div> ';
 
     $("#resultContainer").append(content);
   }else{
     for(x=0;x<limit;x++){
-      var embedFunction=`onclick="speak('`+array[x].rar+`')"`
+      var sizeclass="";
+      if (limit==1){
+        sizeclass="full";
+      }
 
-      var content='<div class="col-md-6"><div class="card"><div class="card-header"><span class="badge badge-warning">Rarámuri</span> <span class="material-icons"'+embedFunction+' >volume_up</span>'+
+      var content='<div class="'+sizeclass+'"><div class="card"><div class="card-header"><span class="badge badge-warning">Rarámuri</span>'+
         array[x].rar
-      +' </div><div class="card-body"><p class="card-text">'+
+      +' </div><div class="card-body"><span class="badge badge-warning">Español</span>'+
         array[x].spa
-      +'</p></div></div></div> ';
+      +'</div></div></div> ';
 
       $("#resultContainer").append(content);
     }
