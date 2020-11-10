@@ -7,6 +7,7 @@ body {
  background-image: url("img/balance.png");
  background-size: auto auto ;
  background-repeat: no-repeat;
+ background-color: #190d14;
 }
 
 nav {
@@ -133,16 +134,17 @@ h1 {
   font-family: 'Roboto', sans-serif;
 }
 
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-  .container {width: 90%;}
-  .data_container{grid-template-columns: 1fr 1fr 1fr;}
+  .container {width: 95%;}
+  .data_container{grid-template-columns: 1fr 1fr;}
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
    .container {width: 80%;}
-     .data_container{grid-template-columns: 1fr 1fr;}
+     .data_container{grid-template-columns: 1fr 1fr 1fr;}
 }
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
