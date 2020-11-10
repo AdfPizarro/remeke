@@ -1,4 +1,5 @@
 var search=""
+var tags_list=[];
 
 
 
@@ -28,15 +29,19 @@ var openFile = function(event) {
       tagList=lines[x].split('#');
       tags=[];
       for(y=1;y<tagList.length;y++){
+        if (!(tags_list.includes(tagList[y].trim()))){
+          tags_list.push(tagList[y].trim());
+        }
         tags.push(tagList[y].trim())
+
       }
 
 
       dictionary.push({rar:rar, spa:spa, rarNo:rarNo, spaNo:spaNo, tags:tags});
 
     }
-
-    console.log(dictionary)
+    //console.log(dictionary);
+    console.log(tags_list);
 
       };
       reader.readAsText(input.files[0]);
