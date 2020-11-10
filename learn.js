@@ -2,6 +2,7 @@ $( document ).ready(function() {
 
 draw(getTags(dictionary));
  $(".carousel").hide();
+// drawPractice();
 });
 
 var allTags=[];
@@ -9,7 +10,7 @@ var carrouselIndex=0;
 var currentList=[];
 
 function resetCarrousel(){
-  var carrouselIndex=0;
+  carrouselIndex=0;
   while (currentList.length) {
     currentList.pop();
   }
@@ -28,6 +29,49 @@ function display(id){
  getWords(id);
 
  $(".carousel").show();
+}
+
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+function drawPractice(){
+  $(".back").hide();
+  $(".next").hide();
+
+  var x=getRandomArbitrary(0,currentList.length);
+
+  var number="Selecciona la opcion que corresponda con la traduccion";
+  $(".number").empty()
+  $(".number").append(number);
+
+
+  $(".carrouselContent").empty();
+   var content='<div><div class="card"><div class="card-header"><span class="badge badge-warning">Rarámuri</span>'+
+     "a"
+   +' </div><div class="card-body"><span class="badge badge-warning">Español</span>'+
+     "a"
+   +'</div></div></div> ';
+
+
+   $(".carrouselContent").append(content);
+
+}
+
+function sendAnswer(id){
+
+  var x=getRandomArbitrary(0,currentList.length);
+
+  $(".carrouselContent").empty();
+   var content='<div><div class="card"><div class="card-header"><span class="badge badge-warning">Rarámuri</span>'+
+     words[x].rar
+   +' </div><div class="card-body"><span class="badge badge-warning">Español</span>'+
+     words[x].spa
+   +'</div></div></div> ';
+
+
+   $(".carrouselContent").append(content);
+
 }
 
 function next(){
@@ -53,6 +97,8 @@ function prev(){
 }
 
 function drawCarousel(){
+  $(".back").show();
+  $(".next").show();
  var number=(carrouselIndex+1)+"/"+currentList.length;
  $(".number").empty()
  $(".number").append(number);
