@@ -1,122 +1,25 @@
+$( document ).ready(function() {
 
-var search=""
-var tags_list=[];
-
-
-
-var openFile = function(event) {
-
-      var input = event.target;
-      var reader = new FileReader();
-      reader.onload = function(){
-        var text = reader.result;
-        var node = document.getElementById('output');
-
-    lines=text.split("\n");
-    while (dictionary.length) {
-      dictionary.pop();
-    }
-
-    for(x=0;x<lines.length-1;x++){
-      tagList=[];
-      var rar=lines[x].substring(0,lines[x].indexOf(','));
-      lines[x]=lines[x].substring(lines[x].indexOf(',')+1,lines[x].length);
-
-      var spa=lines[x].substring(0,lines[x].indexOf(','));
-      lines[x]=lines[x].substring(lines[x].indexOf(',')+1,lines[x].length-2);
-      var rarNo=noAccent(rar);
-      var spaNo=noAccent(spa);
-      //console.log(lines[x])
-
-
-
-
-      tagList=lines[x].split('#');
-      tags=[];
-      for(y=1;y<tagList.length;y++){
-        if (!(tags_list.includes(tagList[y].trim()))){
-          tags_list.push(tagList[y].trim());
-        }
-        tags.push(tagList[y].trim())
-
-      }
-
-
-      dictionary.push({rar:rar, spa:spa, rarNo:rarNo, spaNo:spaNo, tags:tags});
-
-    }
-
-
-
-
-
-      };
-      reader.readAsText(input.files[0]);
-};
-
-
-function noAccent(word){
-  return word.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-}
-
-function speak(text){
-    speechSynthesis.speak(new SpeechSynthesisUtterance(text));
-
-  speechSynthesis.onvoiceschanged = () => {
-  const synth = speechSynthesis
-  const voices = synth.getVoices()
-  console.log(voices)
-  const utterThis = new SpeechSynthesisUtterance(text)
-  utterThis.voice = voices.find(v => v.name === 'Jorge')
-  utterThis.pitch = 1.5
-  utterThis.rate = 2
-  synth.speak(utterThis)
-}
-}
-
-$("#input" ).keyup(function() {
- search=$("#input").val().toLowerCase();
-
- if (search.length == 0) {
-   $(".notes").show();
-   $("#resultContainer").empty()
- }else{
-   $(".notes").hide();
-   draw(filter(search));
- }
-
+draw(getTags(dictionary));
 });
 
-function filter(word){
-  filteredResult=[];
-  for(x=0;x<dictionary.length;x++){
-    if (dictionary[x].rarNo.includes(word)||dictionary[x].spaNo.includes(word)){
-      filteredResult.push(dictionary[x])
-    }
-  }
-  return filteredResult
+function display(id){
+  console.log(id);
 }
 
 function draw(array){
   $("#resultContainer").empty()
   var limit;
   var mediaWidth = window.matchMedia("(max-width: 600px)");
+  limit=array.length;
 
-  if (array.length>15){
-    limit=15;
-  }else{
-    limit=array.length;
-  }
 
-  if (limit>=7&&mediaWidth.matches) {
-     limit=8;
-  }
 
   if (array.length==0){
     var content='<div class="no_info"><h2>No hay informacion</h2>'
     +'</div> ';
 
-    $("#resultContainer").append(content);
+    $("#container").append(content);
   }else{
     for(x=0;x<limit;x++){
       var sizeclass="";
@@ -124,11 +27,11 @@ function draw(array){
         sizeclass="full";
       }
 
-      var content='<div class="'+sizeclass+'"><div class="card"><div class="card-header"><span class="badge badge-warning">Rarámuri</span>'+
-        array[x].rar
-      +' </div><div class="card-body"><span class="badge badge-warning">Español</span>'+
-        array[x].spa
-      +'</div></div></div> ';
+      var content='<div onclick="display('+x+')""><div class="card"><div class="card-header">'+
+        array[x]
+      +' </div><div class="card-body">'+
+
+      '</div></div></div> ';
 
       $("#resultContainer").append(content);
     }
@@ -138,7 +41,24 @@ function draw(array){
 
 }
 
+function getTags(array){
+  tags=[];
+  for (x=0;x<array.length-1;x++){
+    if (array[x].hasOwnProperty('tags')){
+      tagList=array[x].tags
+      for(y=0;y<tagList.length;y++){
+        if (!(tags.includes(tagList[y]))){
+          tags.push(tagList[y]);
+        }
 
+      }
+    }
+
+
+  }
+  console.log(tags);
+  return tags
+}
 const dictionary=[
   {
     "rar": "ásiga",

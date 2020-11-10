@@ -70,7 +70,7 @@ a{
   text-align: right;
 }
 
-.result_container{
+.data_container{
   margin-top: 10px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -84,6 +84,7 @@ a{
   border-radius: 10px;
   padding: 10px;
   font-family: 'Roboto', sans-serif;
+  text-transform: capitalize;
 }
 
 h1 {
@@ -101,7 +102,7 @@ h1 {
 }
 
 .notes{
-  margin-top: 15px;
+
   background-color:
   rgba(255, 255, 255, 0.8);
   border-radius: 15px;
@@ -129,17 +130,17 @@ h1 {
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   .container {width: 90%;}
-  .result_container{grid-template-columns: 1fr;}
+  .container{grid-template-columns: 1fr;}
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
    .container {width: 80%;}
-     .result_container{grid-template-columns: 1fr 1fr;}
+     .container{grid-template-columns: 1fr 1fr;}
 }
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-  .result_container{grid-template-columns: 1fr 1fr 1fr;}
+  .container{grid-template-columns: 1fr 1fr 1fr;}
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
