@@ -1,11 +1,97 @@
 $( document ).ready(function() {
 
 draw(getTags(dictionary));
+ $(".carousel").hide();
 });
 
-function display(id){
-  console.log(id);
+var allTags=[];
+var carrouselIndex=0;
+var currentList=[];
+
+function resetCarrousel(){
+  var carrouselIndex=0;
+  while (currentList.length) {
+    currentList.pop();
+  }
+  while (allTags.length) {
+    allTags.pop();
+  }
+  draw(getTags(dictionary));
+   $(".carousel").hide();
 }
+
+function display(id){
+  console.log(allTags[id]);
+  $(".card").hide();
+  $(".notes").hide();
+
+ getWords(id);
+
+ $(".carousel").show();
+}
+
+function next(){
+
+ if (carrouselIndex+1<currentList.length){
+   carrouselIndex++;
+   drawCarousel();
+   console.log(currentList);
+ }else{
+   resetCarrousel();
+ }
+
+}
+
+function prev(){
+  if (carrouselIndex>0){
+    carrouselIndex--;
+    drawCarousel();
+    console.log(currentList);
+  }else{
+    resetCarrousel();
+  }
+}
+
+function drawCarousel(){
+ var number=(carrouselIndex+1)+"/"+currentList.length;
+ $(".number").empty()
+ $(".number").append(number);
+
+ drawCarouselContent(currentList,carrouselIndex);
+}
+
+function drawCarouselContent(words, x){
+ $(".carrouselContent").empty();
+  var content='<div><div class="card"><div class="card-header"><span class="badge badge-warning">Rarámuri</span>'+
+    words[x].rar
+  +' </div><div class="card-body"><span class="badge badge-warning">Español</span>'+
+    words[x].spa
+  +'</div></div></div> ';
+
+
+  $(".carrouselContent").append(content);
+}
+
+function getWords(id){
+  var wordList=[];
+  var tag=allTags[id];
+  for (x=0;x<dictionary.length;x++){
+    if (dictionary[x].hasOwnProperty('tags')){
+      tagList=dictionary[x].tags
+
+        if (tagList.includes(tag)){
+          wordList.push(dictionary[x]);
+        }
+
+      }
+    }
+
+ currentList=wordList;
+ drawCarousel(wordList);
+ return wordList;
+
+}
+
 
 function draw(array){
   $("#resultContainer").empty()
@@ -57,6 +143,7 @@ function getTags(array){
 
   }
   console.log(tags);
+  allTags=tags;
   return tags
 }
 const dictionary=[
