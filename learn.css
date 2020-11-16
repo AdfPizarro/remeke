@@ -10,6 +10,8 @@ body {
  background-color: #190d14;
 }
 
+
+
 nav {
   text-align: right;
   padding: 10px;
@@ -23,6 +25,19 @@ a{
   padding: 5px;
   border-radius: 5px;
   font-weight: 700;
+}
+
+.catTitle{
+  text-align: center;
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+
+.back, .next{
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 16px;
 }
 
 .container {
@@ -76,6 +91,12 @@ a{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 
+}
+
+.carrouselContent{
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
 }
 
 .card, .carousel{
@@ -134,6 +155,59 @@ h1 {
   font-family: 'Roboto', sans-serif;
 }
 
+.flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 200px;
+
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  margin: auto;
+
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover  .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Style the back side */
+.flip-card-back {
+  transform: rotateY(180deg);
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
