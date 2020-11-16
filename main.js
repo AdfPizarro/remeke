@@ -3306,7 +3306,7 @@ const dictionary=[
     "rarNo": "sotochi",
     "spaNo": "chaparro",
     "tags": [
-      "adjetivos,"
+      "adjetivos"
     ]
   },
   {
@@ -14794,7 +14794,7 @@ const dictionary=[
     "rarNo": "ocherami",
     "spaNo": "viejo - anciano",
     "tags": [
-      "adjetivo"
+      "adjetivos"
     ]
   },
   {
